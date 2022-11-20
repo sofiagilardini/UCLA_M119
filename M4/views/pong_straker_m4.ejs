@@ -6,7 +6,7 @@
   <style>
   html, body {
     height: 100%;
-    margin: 0;
+    margin-top: 100;
   }
 
   body {
@@ -16,10 +16,19 @@
     justify-content: center;
   }
 
+  .title {
+        height: 50px;
+        width: 50px;
+        color: rgb(252, 252, 252);
+        position: fixed;
+        right: 50vw;
+        margin-top: -75px;
+      }
+
   .player_1_score {
         height: 50px;
         width: 50px;
-        color: chartreuse;
+        color: rgb(235, 245, 225);
         position: fixed;
         left: 30vw;
         margin-top: 30px;
@@ -28,7 +37,7 @@
   .player_2_score {
     height: 50px;
     width: 50px;
-    color: chartreuse;
+    color: rgb(218, 230, 206);
     position: fixed;
     left: 70vw;
     margin-top: 30px;
@@ -41,6 +50,7 @@
   <div class="board">
     <h1 class = "player_1_score">0</h1>
     <h1 class="player_2_score">0</h1>
+    <h1 class="title">SOFIA'S PONG</h1>
 
 <canvas width="750" height="585" id="game"></canvas>
 <script>
