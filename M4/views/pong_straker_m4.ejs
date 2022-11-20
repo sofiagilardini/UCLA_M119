@@ -24,11 +24,24 @@
         left: 30vw;
         margin-top: 30px;
       }
+  
+  .player_2_score {
+    height: 50px;
+    width: 50px;
+    color: chartreuse;
+    position: fixed;
+    left: 70vw;
+    margin-top: 30px;
+  }
   </style>
 
 
 </head>
 <body>
+  <div class="board">
+    <h1 class = "player_1_score">0</h1>
+    <h1 class="player_2_score">0</h1>
+
 <canvas width="750" height="585" id="game"></canvas>
 <script>
 const canvas = document.getElementById('game');
@@ -37,16 +50,20 @@ const grid = 15;
 const paddleHeight = grid * 5; // 80
 const maxPaddleY = canvas.height - grid - paddleHeight;
 
+let score_1 = document.querySelector('.player_1_score');
+let score_2 = document.querySelector('.player_2_score');
+
 var paddleSpeed = 6;
 var ballSpeed = 5;
+var score = 0;
 
 const leftPaddle = {
   // start in the middle of the game on the left side
   x: grid * 2,
   y: 0, // canvas.height / 2 - paddleHeight / 2,
   width: grid,
-  //height: paddleHeight,
-  height: canvas.height * 2,
+  height: paddleHeight,
+
 
   // paddle velocity
   dy: 0
@@ -129,8 +146,22 @@ function loop() {
   }
 
   // reset ball if it goes past paddle (but only if we haven't already done so)
-  if ( (ball.x < 0 || ball.x > canvas.width) && !ball.resetting) {
+  //if ( (ball.x < 0 || ball.x > canvas.width) && !ball.resetting) {
+  if ( (ball.x < 0) && !ball.resetting) {
     ball.resetting = true;
+    score_2.innerHTML = +score_2.innerHTML + 1;
+
+    // give some time for the player to recover before launching the ball again
+    setTimeout(() => {
+      ball.resetting = false;
+      ball.x = canvas.width / 2;
+      ball.y = canvas.height / 2;
+    }, 400);
+  }
+
+  if ( (ball.x > canvas.width) && !ball.resetting) {
+    ball.resetting = true;
+    score_1.innerHTML = +score_1.innerHTML + 1;
 
     // give some time for the player to recover before launching the ball again
     setTimeout(() => {
@@ -155,6 +186,15 @@ function loop() {
     // in the next frame
     ball.x = rightPaddle.x - ball.width;
   }
+
+  if (leftPaddle.y - ball.y > 40) {
+    leftPaddle.dy = -paddleSpeed;
+  }
+
+  else if (leftPaddle.y - ball.y < -40) {
+    leftPaddle.dy = paddleSpeed;
+  }
+
 
   // draw ball
   context.fillRect(ball.x, ball.y, ball.width, ball.height);
@@ -191,6 +231,7 @@ document.addEventListener('keydown', function(e) {
     leftPaddle.dy = paddleSpeed;
   }
 });
+
 
 // // listen to keyboard events to stop the paddle if key is released
 // document.addEventListener('keyup', function(e) {
