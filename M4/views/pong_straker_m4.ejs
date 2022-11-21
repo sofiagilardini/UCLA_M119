@@ -54,6 +54,17 @@
 
 <canvas width="750" height="585" id="game"></canvas>
 <script>
+
+/*  EJS file for pong game
+  Adapted from: 
+  https://gist.github.com/straker/81b59eecf70da93af396f963596dfdc5,
+  https://www.geeksforgeeks.org/pong-game-in-javascript/, 
+  and M3 code
+
+  by Sofia Gilardini (UID: 806095352) for ECE M119
+*/
+
+
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
 const grid = 15;
@@ -156,7 +167,7 @@ function loop() {
   }
 
   // reset ball if it goes past paddle (but only if we haven't already done so)
-  //if ( (ball.x < 0 || ball.x > canvas.width) && !ball.resetting) {
+  // add score to respective player
   if ( (ball.x < 0) && !ball.resetting) {
     ball.resetting = true;
     score_2.innerHTML = +score_2.innerHTML + 1;
@@ -197,6 +208,7 @@ function loop() {
     ball.x = rightPaddle.x - ball.width;
   }
 
+  // generate 'computer player' for left paddle. To toggle difficulty, change the value 40
   if (leftPaddle.y - ball.y > 40) {
     leftPaddle.dy = -paddleSpeed;
   }
@@ -219,41 +231,6 @@ function loop() {
     context.fillRect(canvas.width / 2 - grid / 2, i, grid, grid);
   }
 }
-
-// listen to keyboard events to move the paddles
-document.addEventListener('keydown', function(e) {
-
-  // up arrow key
-  if (e.which === 38) {
-    rightPaddle.dy = -paddleSpeed;
-  }
-  // down arrow key
-  else if (e.which === 40) {
-    rightPaddle.dy = paddleSpeed;
-  }
-
-  // w key
-  if (e.which === 87) {
-    leftPaddle.dy = -paddleSpeed;
-  }
-  // a key
-  else if (e.which === 83) {
-    leftPaddle.dy = paddleSpeed;
-  }
-});
-
-
-// // listen to keyboard events to stop the paddle if key is released
-// document.addEventListener('keyup', function(e) {
-//   if (e.which === 38 || e.which === 40) {
-//     rightPaddle.dy = 0;
-//   }
-
-//   if (e.which === 83 || e.which === 87) {
-//     leftPaddle.dy = 0;
-//   }
-// });
-
 
 
 // start the game
