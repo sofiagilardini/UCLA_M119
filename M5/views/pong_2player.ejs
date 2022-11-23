@@ -243,24 +243,24 @@ requestAnimationFrame(loop);
 	const SERVERADDRESS = "http://127.0.0.1:3000"
 
 	// use XML HTTP request to grab data from the server (central)
-	let xmlhttp = new XMLHttpRequest()
+  let xmlhttp = new XMLHttpRequest()
 	xmlhttp.onreadystatechange = function () {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			let responseText = xmlhttp.responseText
-			let sensorValue = parseFloat(JSON.parse(responseText).sensorValue)
+			//let sensorValue = parseFloat(JSON.parse(responseText).sensorValue)
       let sensorValue2 = parseFloat(JSON.parse(responseText).sensorValue2)
 
 
 			// use d3 to visualize sensor value as the web page background color
-			let colorValue = Math.max(0, Math.min((sensorValue + 1) * 0.5, 1))
-			console.log(colorValue)
-			let color = "rgba(0, 0, 0, " + colorValue + ")"
+			// let colorValue = Math.max(0, Math.min((sensorValue + 1) * 0.5, 1))
+			// console.log(colorValue)
+			// let color = "rgba(0, 0, 0, " + colorValue + ")"
 			//d3.select("body").style("background-color", color)
 
-      console.log("SENSOR VALUE1: ",sensorValue)
-      console.log("SENSOR VALUE2: ",sensorValue2)
+      //console.log("SENSOR VALUE1: ",sensorValue)
+      //console.log("SENSOR VALUE2: ",sensorValue2)
       
-      if (sensorValue > 0) {
+      if (sensorValue2 > 0) {
         rightPaddle.dy = paddleSpeed
       }
       else {

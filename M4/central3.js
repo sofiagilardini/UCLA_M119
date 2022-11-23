@@ -4,8 +4,11 @@ const noble = require('@abandonware/noble');
 
 const uuid_service = "1101"
 const uuid_value = "2101"
+const uuid_value2 = "2102"
+const uuid_value3 = "2103"
 
 let sensorValue = NaN
+ 
 
 noble.on('stateChange', async (state) => {
     if (state === 'poweredOn') {
@@ -26,14 +29,17 @@ noble.on('discover', async (peripheral) => {
 //
 // read data periodically
 //
-let readData = async (characteristic) => {
+let readData = async (characteristic, characteristic2, characteristic3) => {
     const value = (await characteristic.readAsync());
+
     sensorValue = value.readFloatLE(0);
+
+
     console.log(sensorValue);
 
     // read data again in t milliseconds
     setTimeout(() => {
-        readData(characteristic)
+        readData(characteristic,)
     }, 10);
 }
 

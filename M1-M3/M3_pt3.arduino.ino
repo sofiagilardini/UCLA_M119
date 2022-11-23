@@ -1,7 +1,7 @@
 #include <ArduinoBLE.h>
 #include <Arduino_LSM6DS3.h>
 
-#define BLE_UUID_ACCELEROMETER_SERVICE "1101"
+#define BLE_UUID_ACCELEROMETER_SERVICE "1102"
 #define BLE_UUID_ACCELEROMETER_X "2101"
 #define BLE_UUID_ACCELEROMETER_Y "2102"
 #define BLE_UUID_ACCELEROMETER_Z "2103"
@@ -19,7 +19,7 @@ float x, y, z;
 
 void setup() {
   Serial.begin(9600);
-  while (!Serial)
+  //while (!Serial)
     ;
 
   // initialize IMU
